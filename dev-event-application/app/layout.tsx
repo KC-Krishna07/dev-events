@@ -4,6 +4,7 @@ import "./globals.css";
 import { cn } from "@/lib/utils";
 import LightRays from "../components/LightRays";
 import Navbar from "@/components/Navbar";
+import { logApplicationShellRendered } from "@/lib/posthog-logs";
 
 const geist = Geist({subsets:['latin'],variable:'--font-sans'});
 
@@ -23,6 +24,8 @@ export const metadata: Metadata = {
 };
 
 export default function RootLayout({ children }: LayoutProps<"/">) {
+  logApplicationShellRendered();
+
   return (
     <html lang="en">
       <body 

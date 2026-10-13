@@ -1,8 +1,12 @@
 import ExploreBtn from '@/components/ExploreBtn';
 import EventCard from '@/components/EventCard';
 import { events } from '../lib/constants';
+import { flushPostHogLogs, logEventCatalogueRendered } from '@/lib/posthog-logs';
 
 const page = () => {
+  logEventCatalogueRendered(events.length);
+  flushPostHogLogs();
+
   return (
     <section>
       <h1 className="text-center">The Hub for Every Dev <br /> Event You Can't Miss</h1>

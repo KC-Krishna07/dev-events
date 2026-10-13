@@ -1,10 +1,22 @@
 'use client'
 
 import Image from "next/image";
+import posthog from "posthog-js";
+
+const isPostHogConfigured = Boolean(
+  process.env.NEXT_PUBLIC_POSTHOG_PROJECT_TOKEN && process.env.NEXT_PUBLIC_POSTHOG_HOST
+);
 
 const ExploreBtn = () => {
+  const handleExplore = () => {
+    if (isPostHogConfigured) {
+      posthog.capture("event_catalogue_explored");
+    }
+    console.log('CLICKED BUTTON');
+  };
+
   return (
-    <button type="button" id="explore-btn" className="mt-7 mx-auto" onClick={() => console.log('CLICKED BUTTON')}>
+    <button type="button" id="explore-btn" className="mt-7 mx-auto" onClick={handleExplore}>
       <a href="#events">
         Explore Events
         <Image src="/icons/arrow-down.svg" alt="arrow-down" width={24} height={24} />
